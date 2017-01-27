@@ -1,0 +1,70 @@
+recursive-gitconfig
+===================
+
+Alias `git` to use closest `.gitconfig` file in parents directories instead default of one.
+Allow to use severals 'git environments' with differents user.name, user.email, aliases and more.
+
+
+Use case:
+---------
+
+    . I work for myself and a company with the same computer and session.
+    . When I code for my company I would like to commit as 'John Doe' with email 'johnd@company.com'
+    . When I code for myself I would like to commit as 'xxX-John-Xxx' with email 'xxxjohxxx@hotmail.lol'
+    . To do that I would like all repositories under /home/john/Work/ uses a special .gitconfig
+        and all repositories under /home/john/Personal/ uses another .gitconfig file.
+    . /home/john/Work/.gitconfig will configure user as 'John Doe' and /home/john/Personal/.gitconfig as 'xxX-John-Xxx'.
+    . recursive-gitconfig will manage theses two 'git environments' for me.
+
+
+    Because recursive-gitconfig look for closest .gitconfig file in **parents** you will able to
+    make recursions and inheritance.
+
+
+Install:
+--------
+
+    . Get script file: https://raw.githubusercontent.com/arount/recursive-gitconfig/master/recursive-gitconfig
+    . Copy file somewhere (typically in `~/.recursive-gitconfig`).
+    . Add it to your .bashrc (or other depending you shell): `echo "source ~/.recursive-gitconfig" >> ~/.bashrc`
+    . Source it for the first run: `source ~/.recursive-gitconfig`.
+
+
+Configure:
+----------
+
+    Remember recursive-gitconfig will look for **closest** .gitconfig file and use this one only.
+    Recursion comes by https://git-scm.com/docs/git-config#_includes .
+
+    Taking same example as use case you have to:
+
+        1. Create a file ~/Work/.gitconfig and fill it like:
+
+            ```
+            [include]
+                path = /home/john/.gitconfig
+
+            [user]
+                email = johnd@company.com
+                name  = John Doe
+            ```
+
+        2. And another one in ~/Personal/.gitconfig:
+
+            ```
+            [include]
+                path = /home/john/.gitconfig
+
+            [user]
+                email = xxx-john-xxx@hotmail.lol
+                name  = xxX-John-Xxx
+            ```
+
+    Now all git repositories under ~/Work/ will use ~/Work/.gitconfig and repos under ~/Personal/ use ~/Personal/.gitconfig without
+    any commands or commands to type.
+
+    Note include.path will load the given config file and override it by next sections. Order is important.
+
+    Obviously you can point to another config file or remove this part to avoid inheritance.
+
+
