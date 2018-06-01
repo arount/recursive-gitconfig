@@ -33,9 +33,9 @@ function __recursive_gitconfig_git {
     gitconfig_file=$(__recursive_gitconfig_closest)
     if [ "$gitconfig_file" != '' ]; then
         home="$(dirname $gitconfig_file)/"
-        HOME=$home /usr/bin/git "$@"
+        HOME=$home "$(which git)" "$@"
     else
-        /usr/bin/git "$@"
+        "$(which git)" "$@"
     fi
 }
 
@@ -45,7 +45,7 @@ function __recursive_gitconfig_closest {
     directory="$PWD"
     for (( n=${#slashes}; n>0; --n ))
     do
-        test -e "$directory/.gitconfig" && echo "$directory/.gitconfig" && return 
+        test -e "$directory/.gitconfig" && echo "$directory/.gitconfig" && return
         directory="$directory/.."
     done
 }
