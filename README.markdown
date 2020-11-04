@@ -1,7 +1,7 @@
 recursive-gitconfig
 ===================
 
-`recusrive-gitconfig` is a Bash tool to support several `.gitconfig` within the same Linux session.
+`recursive-gitconfig` is a Bash tool to support several `.gitconfig` within the same Linux session.
 
 It can also be use to handle several dynamic Git identities.
 
