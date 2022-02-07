@@ -32,9 +32,9 @@ Let's say your home directory is something like:
 	│   ├── project-three
 	│   └── project-two
 	└── work
-		├── client-project-one
-		├── client-project-two
-		└── .gitconfig
+	    ├── client-project-one
+	    ├── client-project-two
+	    └── .gitconfig
 
 You basicaly have two main folders, `personal` and `work` and subfolders for each project.
 
